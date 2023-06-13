@@ -50,6 +50,8 @@ class _ExampleTwoState extends State<ExampleTwo> {
                             backgroundImage: NetworkImage(
                                 snapshot.data![index].url.toString()),
                           ),
+                          subtitle: Text("Notes id:" +
+                              snapshot.data![index].title.toString()),
                           title: Text("Notes id:" +
                               snapshot.data![index].id.toString()),
                         );
