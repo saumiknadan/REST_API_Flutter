@@ -3,6 +3,7 @@ import 'package:rest_api_flutter/example_five.dart';
 import 'package:rest_api_flutter/example_four.dart';
 import 'package:rest_api_flutter/example_three.dart';
 import 'package:rest_api_flutter/example_two.dart';
+import 'package:rest_api_flutter/signup.dart';
 import 'home_screen.dart';
 
 void main() {
@@ -20,6 +21,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.green,
         ),
-        home: const ExampleFive());
+        home: const SignUp());
   }
 }
