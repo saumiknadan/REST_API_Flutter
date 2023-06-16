@@ -5,6 +5,7 @@ import 'package:rest_api_flutter/example_three.dart';
 import 'package:rest_api_flutter/example_two.dart';
 import 'package:rest_api_flutter/signup.dart';
 import 'home_screen.dart';
+import 'upload_image.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,6 +22,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.green,
         ),
-        home: const SignUp());
+        home: const UploadImage());
   }
 }
