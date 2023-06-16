@@ -30,7 +30,42 @@ class _UploadImageState extends State<UploadImage> {
   }
   // Function End
 
+  Future uploadImage() async {
+    setState(() {
+      showSpinner = true;
+    });
 
+    var stream = new http.ByteStream(image!.openRead());
+    stream.cast();
+
+    var length = await image!.length();
+
+    var uri = Uri.parse('https://fakestoreapi.com/products');
+
+    var request = new http.MultipartRequest('POST', uri);
+
+    request.fields['title'] = "Static title";
+
+    var multiport = new http.MultipartFile('image', stream, length);
+
+    request.files.add(multiport);
+
+    var response = await request.send();
+
+    print(response.stream.toString());
+
+    if (response.statusCode == 200) {
+      setState(() {
+        showSpinner = false;
+      });
+      print('image uploaded');
+    } else {
+      print('failed');
+      setState(() {
+        showSpinner = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +102,7 @@ class _UploadImageState extends State<UploadImage> {
           ),
           GestureDetector(
             onTap: () {
-             
+              uploadImage();
             },
             child: Container(
               height: 50,
