@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class UploadImage extends StatefulWidget {
   const UploadImage({Key? key}) : super(key: key);
@@ -30,6 +31,8 @@ class _UploadImageState extends State<UploadImage> {
   }
   // Function End
 
+
+//  Inserted Image upload er function start
   Future uploadImage() async {
     setState(() {
       showSpinner = true;
@@ -67,51 +70,56 @@ class _UploadImageState extends State<UploadImage> {
     }
   }
 
+  // Function End
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Upload Image'),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-            onTap: () {
-              getImage();
-            },
-            child: Container(
-                child: image == null
-                    ? Center(
-                        child: Text('Pick Image'),
-                      )
-                    : Container(
-                        child: Center(
-                          child: Image.file(
-                            File(image!.path).absolute,
-                            height: 100,
-                            width: 100,
+    return ModalProgressHUD(
+      inAsyncCall: showSpinner,
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text('Upload Image'),
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: () {
+                getImage();
+              },
+              child: Container(
+                  child: image == null
+                      ? Center(
+                          child: Text('Pick Image'),
+                        )
+                      : Container(
+                          child: Center(
+                            child: Image.file(
+                              File(image!.path).absolute,
+                              height: 100,
+                              width: 100,
+                            ),
                           ),
-                        ),
-                      )),
-          ),
-          SizedBox(
-            height: 150,
-          ),
-          GestureDetector(
-            onTap: () {
-              uploadImage();
-            },
-            child: Container(
-              height: 50,
-              width: 200,
-              color: Colors.green,
-              child: Center(child: Text('Upload')),
+                        )),
             ),
-          ),
-        ],
+            SizedBox(
+              height: 150,
+            ),
+            GestureDetector(
+              onTap: () {
+                uploadImage();
+              },
+              child: Container(
+                height: 50,
+                width: 200,
+                color: Colors.green,
+                child: Center(child: Text('Upload')),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
